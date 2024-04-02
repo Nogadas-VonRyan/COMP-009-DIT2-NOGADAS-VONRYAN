@@ -1,6 +1,6 @@
 package COMP009;
 
-public class Printer {
+public class FoodPrinter {
 	public void printTree() {
 		System.out.print(
 				"└── Consumable\n" +
