@@ -3,18 +3,18 @@ package COMP009.POS;
 import java.time.LocalDate;
 import java.util.Scanner;
 public class PointOfSale {
-	public Scanner scan = new Scanner(System.in);
-	public int products_count = 0;
-	public int purchased_count = 0;
-	public Product products[] = new Product[100];
-	public Product purchased[] = new Product[100];
+	public static Scanner scan = new Scanner(System.in);
+	public static int products_count = 0;
+	public static int purchased_count = 0;
+	public static Product products[] = new Product[100];
+	public static Product purchased[] = new Product[100];
 	
-	public void addProduct(String name, double price) {
+	public static void addProduct(String name, double price) {
 		products[products_count] = new Product(name,price,products_count+1);
 		products_count++;
 	}
 	
-	public void setUpProducts() {
+	public static void setUpProducts() {
 		addProduct("Milo", 10);
 		addProduct("Coca-Cola", 60);
 		addProduct("Nike Shoes", 3000);
@@ -47,14 +47,14 @@ public class PointOfSale {
 
 	}
 	
-	public void displayProducts() {
+	public static void displayProducts() {
 		System.out.println("\n\n=================\nProducts List:");
 		for(int i=0; i<products_count; i++) {
 			System.out.println((i+1) + ". " + products[i].name + " - " + products[i].price);
 		}
 	}
 	
-	public void displayPurchased() {
+	public static void displayPurchased() {
 		int total = 0;
 		System.out.println("\n\n==================\nPurchased List:");
 		for(int i=0; i<purchased_count; i++) {
@@ -64,14 +64,14 @@ public class PointOfSale {
 		System.out.println("The total price is: " + total);
 	}
 	
-	public Product addToPurchase(int input_id) {
+	public static Product addToPurchase(int input_id) {
 		//TO DO: range validation
 		purchased[purchased_count] = products[input_id - 1];
 		purchased_count++;
 		return products[input_id - 1];
 	}
 	
-	public void purchaseProducts() {
+	public static void purchaseProducts() {
 		displayProducts();
 		boolean isPurchasing = true;
 		while(isPurchasing) {
@@ -96,7 +96,7 @@ public class PointOfSale {
 		displayReceipt();
 	}
 	
-	public void displayReceipt(){
+	public static void displayReceipt(){
 		int total = 0;
 		System.out.println("\n\n======== Receipt =========");
 		System.out.println("Point of Sale System");
@@ -112,7 +112,7 @@ public class PointOfSale {
 		System.out.println("\n======== Receipt =========\n");
 	}
 	
-	public void startSystem() {
+	public static void main(String[] args) {
 		setUpProducts();
 		boolean isSystemRunning = true;
 		while(isSystemRunning) {
@@ -143,12 +143,14 @@ public class PointOfSale {
 			if(!continue_input.equals("y")) {
 				exit();
 			}
+			purchased = new Product[100];
+			purchased_count = 0;
 		}
 		scan.close();
 		exit();
 	}
 	
-	public void exit() {
+	public static void exit() {
 		System.out.println("\nThank you for using this Point of Sale System.");
 		System.exit(0);
 	}
